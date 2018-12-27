@@ -1,0 +1,25 @@
+/html
+├── ID    ImageDisplay
+│   ├── config.php                  IDの設定ファイル
+│   ├── getImageDataList.php        画像データの一覧を返す
+│   ├── index.php                   スライドショー
+│   ├── jquery.js
+│   ├── jquery.row-grid.min.js
+│   └── login.php                   ログイン
+├── IS    ImageSave
+│   ├── config.php                  ISの設定ファイル
+│   ├── getImage.php                cntが一番小さい画像を返す
+│   ├── images                      画像を保存するディレクトリ
+│   ├── jquery.js
+│   └── save.php                    POSTで送られた画像を保存しDBにファイル名など保存
+├── IU    ImageUpload
+│   ├── config.php                  IUの設定ファイル
+│   ├── css
+│   │   └── css.css
+│   ├── index.php                   アップロード
+│   ├── jquery.js
+│   └── limit.html                  アクセス数に制限がかかったときに表示
+├── create.sql                      データベースのCREATE文とか
+├── detail.txt                      このファイル
+├── makePass.php                    usersに保存するユーザデータのパスワードハッシュ作成
+└── resetlimit.php                  ipsのすべてのcntを0にする
