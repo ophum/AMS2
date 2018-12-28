@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+require_once('lib.php');
 
 function getImageFilename($host){
     $file = "";
