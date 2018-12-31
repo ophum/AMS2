@@ -6,7 +6,7 @@ function getImageFilename($host){
     $file = "";
     $host = h($host);
     try{
-		$pdo = new PDO(DBHOST, DBUSER, DBPASS);
+		$pdo = new PDO(DBSHOST, DBSUSER, DBSPASS);
 		$res = $pdo->prepare("select * from urls where host=:host order by cnt limit 1");
 		$res->bindValue(":host", $host);
 		$res->execute();
@@ -21,6 +21,7 @@ function getImageFilename($host){
 
 		$cnt = $res->fetch(PDO::FETCH_NUM)[0] + 1;
 
+		$pdo = new PDO(DBHOST, DBUSER, DBPASS);
 		$res = $pdo->prepare("update urls set cnt=:cnt where num=:num");
 		$res->bindParam(":cnt", $cnt);
 		$res->bindParam(":num", $num);

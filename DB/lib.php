@@ -10,7 +10,7 @@ function verify($id, $pass){
 	$pass = h($pass);
 	$ret = false;
 	try{
-		$pdo = new PDO(DBHOST, DBUSER, DBPASS);
+		$pdo = new PDO(DBSHOST, DBSUSER, DBSPASS);
 		$res = $pdo->prepare("select password from users where id=:id");
 		$res->bindParam(":id", $id);
 		$res->execute();
@@ -31,7 +31,7 @@ function verify($id, $pass){
 function getCount($ip){
     $cnt = 0;
     try{
-        $pdo = new PDO(DBHOST, DBUSER, DBPASS);
+        $pdo = new PDO(DBSHOST, DBSUSER, DBSPASS);
         $res = $pdo->prepare("select count(*) from ips where ip=:ip");
         $res->bindParam(":ip", $ip);
         $res->execute();

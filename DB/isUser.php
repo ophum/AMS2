@@ -6,7 +6,7 @@ function isUser($id){
 	$ret = false;
 	$id = h($id);
 	try{
-		$pdo = new PDO(DBHOST, DBUSER, DBPASS);
+		$pdo = new PDO(DBSHOST, DBSUSER, DBSPASS);
 		$res = $pdo->prepare("select count(*) from users where id=:id");
 		$res->bindParam(":id", $id);
 		$res->execute();
