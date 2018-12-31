@@ -125,8 +125,9 @@ $(function(){
 				setTimeout(function(){$('.container').fadeIn(1500)}, 500);	
 			}).done(function(){
 				end = cnt;
+				console.log("start: " + start + " end: " + end);
 				console.log("span: " + (end - start));
-				var sleeptime = 3 - end - start;
+				var sleeptime = 8 - (end - start);
 				sleeptime = sleeptime > 0 ? sleeptime : 0;
 				setTimeout(changeImage, sleeptime * 1000);
 			});
