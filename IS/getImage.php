@@ -18,13 +18,7 @@ function verify($id, $pass){
 if(verify($_POST['id'], $_POST['pass'])){
 	$file = "";
 
-	$file = post(DB."getImageFilename.php",
-			array(
-				'dbid' => DBID,
-				'dbpass' => DBPASS,
-				'host' => ADDR
-			)
-		);
+	$file = getImageFilename();
 
 	if($file != "" && $file != null){
 		$file = SAVE_DIR.$file;

@@ -63,14 +63,8 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])){
 	resizeImage($path, 480, 320);
 
 	// databaseに登録
-	post(DB."setImageDetail.php",
-		array(
-			'dbid' => DBID,
-			'dbpass' => DBPASS,
-			'host' => ADDR,
-			'file' => $file
-		)
-	);
+	setImageDetail($file);
+
 }
 header("location: ".SAVED_REDIRECT);
 exit();

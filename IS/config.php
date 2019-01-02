@@ -9,6 +9,9 @@ define('LIMIT_ACCESS', 5);
 // 画像を保存する場所
 define('SAVE_DIR', 'images/');
 
+// 画像情報を保存するsqliteのファイル
+define('SQLITE_DB', 'sqlite:'. SAVE_DIR . 'images.db');
+
 // 画像を保存したあとリダイレクトするページ
 define('SAVED_REDIRECT', 'http://IPAddress or host/IU/index.php');
 
