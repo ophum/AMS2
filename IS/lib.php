@@ -74,6 +74,8 @@ function setImageDetail($file){
 
     try{
         $pdo = new PDO(SQLITE_DB);
+        $pdo->query("create table if not exists urls(num integer primary key autoincrement, host text, file text, cnt integer)");
+
         $res = $pdo->prepare("insert into urls(host, file, cnt) values(:host, :file, :cnt);");
 		
 		$res->bindValue(":host", ADDR, PDO::PARAM_STR);
@@ -92,6 +94,8 @@ function getImageFilename(){
     $host = ADDR;
     try{
         $pdo = new PDO(SQLITE_DB);
+        $pdo->query("create table if not exists urls(num integer primary key autoincrement, host text, file text, cnt integer)");
+        
         $pdo->beginTransaction();
         $res = $pdo->prepare("select * from urls where host=:host order by cnt limit 1");
 		$res->bindValue(":host", $host);
