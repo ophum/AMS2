@@ -12,8 +12,10 @@ define('SAVE_DIR', 'images/');
 // 画像情報を保存するsqliteのファイル
 define('SQLITE_DB', 'sqlite:'. SAVE_DIR . 'images.db');
 
+// IU サーバのURL
+define('IU', 'http://IPAddress or host/IU/');
 // 画像を保存したあとリダイレクトするページ
-define('SAVED_REDIRECT', 'http://IPAddress or host/IU/index.php');
+define('SAVED_REDIRECT', IU.'index.php');
 
 // DataBase サーバのIPアドレスをhttp://から記入
 define('DB', 'http://IPAddress or host/DB/');

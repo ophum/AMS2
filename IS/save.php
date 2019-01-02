@@ -25,7 +25,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 $cnt = getCount($ip);
 
 if($cnt > LIMIT_ACCESS){
-	header("location: limit.html");
+	header("location: ". IU ."limit.html");
 	exit();
 }else {
 	addCount($ip);
