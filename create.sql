@@ -8,14 +8,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`num`)
 );
 
-CREATE TABLE `urls` (
-  `num` int(11) NOT NULL AUTO_INCREMENT,
-  `host` varchar(32) NOT NULL,
-  `file` varchar(128) NOT NULL,
-  `cnt` int(11) DEFAULT NULL,
-  PRIMARY KEY (`num`)
-);
-
 CREATE TABLE `ips` (
   `num` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(32) NOT NULL,
