@@ -106,6 +106,10 @@ img{
 var cnt = 0;
 var start = 0;
 var end = 0;
+
+let IS_Server = "";
+let dbid = "";
+let dbpass = "";
 setInterval(function(){ cnt++; }, 1000);
 $(function(){
 	$('.container').hide();
@@ -113,8 +117,23 @@ $(function(){
 	function changeImage(){
 		var arr = [];
 		start = cnt;
-		$.post("getImageDataList.php", {"num": 9}, function(ds){
-			arr = ds.split("\n");
+		function f(){
+			var d = $.Deferred();
+			for(var i = 0; i < 9; i++){
+				$.post(IS_Server + "getImage.php",
+						{'id': dbid, 'pass': dbpass},
+						function(ds){
+							arr.push(ds);
+							if(arr.length == 9) d.resolve();
+						}
+				);
+			}
+			return d.promise();
+		}
+
+		$.when(
+			f()
+		).done(function(){
 			$.when(
 				$(".container").fadeOut(1500)
 			).done(function(){
@@ -122,7 +141,10 @@ $(function(){
 					$("#image" + i).attr("src", arr[i]);
 				}
 			}).done(function(){
-				setTimeout(function(){$('.container').fadeIn(1500)}, 500);	
+				setTimeout(function(){
+					$('.container').fadeIn(1500);
+					}
+				, 500);	
 			}).done(function(){
 				end = cnt;
 				console.log("start: " + start + " end: " + end);
