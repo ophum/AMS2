@@ -172,8 +172,8 @@ function checkImage($path){
     $check = array("POSSIBLE", "LIKELY", "VERY_LIKELY");
     
     foreach($check as $ch){
-        if($ch != "POSSIBLE" && $spoof == $ch) return false;
-        if($adult == $ch || $medical == $ch || $violence == $ch || $racy == $ch) return false; 
+        if($ch !== "POSSIBLE" && $spoof === $ch) return false;
+        if($adult === $ch || $medical === $ch || $violence == $ch || $racy == $ch) return false; 
     }
     return true;
 }
