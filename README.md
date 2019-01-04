@@ -10,6 +10,11 @@ PHPプログラムにPOSTを送って操作する。
 
 ## IS - ImageSave
 IUから送られてきた画像の保存。IDから要求されたときに画像を返すサーバ
+LAMPサーバの他に以下をインストールする必要がある。
+- php-gd
+- php-pdo
+- php-sqlite3
+- php-curl
 
 ## IU - ImageUpload
 画像をアップロードするページ。
