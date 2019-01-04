@@ -62,10 +62,12 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])){
 	// リサイズ
 	resizeImage($path, 480, 320);
 
+	// 適切な画像かチェックする
 	if(checkImage($path)){
 		// databaseに登録
 		setImageDetail($file);
 	}else {
+		// 不適切な画像なため削除する
 		unlink($path);
 	}
 }
