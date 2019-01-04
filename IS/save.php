@@ -62,9 +62,12 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])){
 	// リサイズ
 	resizeImage($path, 480, 320);
 
-	// databaseに登録
-	setImageDetail($file);
-
+	if(checkImage($path)){
+		// databaseに登録
+		setImageDetail($file);
+	}else {
+		unlink($path);
+	}
 }
 header("location: ".SAVED_REDIRECT);
 exit();

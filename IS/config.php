@@ -22,3 +22,5 @@ define('DB', 'http://IPAddress or host/DB/');
 
 define('DBID', "");
 define('DBPASS', "");
+
+define('APIKEY', "");

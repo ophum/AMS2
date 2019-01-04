@@ -80,7 +80,7 @@ function setImageDetail($file){
 		
 		$res->bindValue(":host", ADDR, PDO::PARAM_STR);
 		$res->bindValue(":file", $file, PDO::PARAM_STR);
-		$res->bindValue(":cnt", 0, PDO::PARAM_INT);
+        $res->bindValue(":cnt", 0, PDO::PARAM_INT);
         $res->execute();
         
         $res = null;
@@ -122,4 +122,58 @@ function getImageFilename(){
         exit();
     }
     return $file;
+}
+ 
+// 適切な画像かGCPのSafe searchで認識する
+// spoof以外はVERY_LIKELY LIKELY POSSIBLEでアウト
+// spoofはVERY_LIKELY LIKELYでアウト
+function checkImage($path){
+
+    $json = json_encode(array(
+            "requests" => array(
+                array(
+                    "image" => array(
+                        "content" => base64_encode(file_get_contents($path)),
+                    ),
+                    "features" => array(
+                        array(
+                            "type" => "SAFE_SEARCH_DETECTION",
+                            "maxResults" => 3,
+                        ),
+                    ),
+                ),
+            ),
+        )
+    );
+
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, "https://vision.googleapis.com/v1/images:annotate?key=".APIKEY);
+    curl_setopt($c, CURLOPT_HEADER, true);
+    curl_setopt($c, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($c, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+    curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($c, CURLOPT_TIMEOUT, 15);
+    curl_setopt($c, CURLOPT_POSTFIELDS, $json);
+    $res1 = curl_exec($c);
+    $res2 = curl_getinfo($c);
+    curl_close($c);
+
+    $json = substr($res1, $res2["header_size"]);
+
+    $res = json_decode($json);
+    $res = $res['responses'];
+    
+    $adult = $res['adult'];
+    $spoof = $res['spoof'];
+    $medical = $res['medical'];
+    $violence = $res['violence'];
+    $racy = $res['racy'];
+    $check = array("POSSIBLE", "LIKELY", "VERY_LIKELY");
+    
+    foreach($check as $ch){
+        if($ch != "POSSIBLE" && $spoof == $ch) return false;
+        if($adult == $ch || $medical == $ch || $violence == $ch || $racy == $ch) return false; 
+    }
+    return true;
 }
